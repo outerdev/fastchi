@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be found
 // in the LICENSE file.
 
-// Package httprouter is a trie based high performance HTTP request router.
+// Package router is a trie based high performance HTTP request router.
 //
 // A trivial example is:
 //
@@ -10,25 +10,25 @@
 //
 //  import (
 //      "fmt"
-//      "github.com/julienschmidt/httprouter"
+//      "github.com/outerdev/fastchi/router"
 //      "net/http"
 //      "log"
 //  )
 //
-//  func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+//  func Index(w http.ResponseWriter, r *http.Request) {
 //      fmt.Fprint(w, "Welcome!\n")
 //  }
 //
-//  func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+//  func Hello(w http.ResponseWriter, r *http.Request) {
 //      fmt.Fprintf(w, "hello, %s!\n", ps.ByName("name"))
 //  }
 //
 //  func main() {
-//      router := httprouter.New()
-//      router.GET("/", Index)
-//      router.GET("/hello/:name", Hello)
+//      r := router.New()
+//      r.Get("/", Index)
+//      r.Get("/hello/:name", Hello)
 //
-//      log.Fatal(http.ListenAndServe(":8080", router))
+//      log.Fatal(http.ListenAndServe(":8080", r))
 //  }
 //
 // The router matches incoming requests by the request method and the path.
@@ -74,7 +74,7 @@
 //  // by the index of the parameter. This way you can also get the name (key)
 //  thirdKey   := ps[2].Key   // the name of the 3rd parameter
 //  thirdValue := ps[2].Value // the value of the 3rd parameter
-package httprouter
+package router
 
 import (
 	"context"
